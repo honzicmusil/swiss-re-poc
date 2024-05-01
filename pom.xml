@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the Project Object Model (POM) for the Maven build system.
+     It defines the project structure, dependencies, and other build properties. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The groupId, artifactId, and version form the project's fully qualified artifact name. -->
+    <groupId>org.epam.swiss.re</groupId>
+    <artifactId>swiss-re-poc</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <!-- Properties that can be used throughout the POM. -->
+    <properties>
+        <!-- The version of Java the project is using. -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <!-- The encoding of the source files. -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- The dependencies this project needs. -->
+    <dependencies>
+        <!-- A dependency on the JUnit Jupiter API for writing tests. -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- The build configuration for this project. -->
+    <build>
+        <plugins>
+            <!-- This plugin is used to create a JAR file from the project. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- Add the project's dependencies to the classpath of the JAR. -->
+                            <addClasspath>true</addClasspath>
+                            <!-- Prefix for the classpath entries. It's used when the dependencies are placed in a subdirectory of the JAR. -->
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <!-- The main class of the application. This is the entry point when the JAR is run. -->
+                            <mainClass>org.epam.swiss.re.BigCompanyStructureOptimiserMain</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
