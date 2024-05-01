@@ -24,7 +24,7 @@ mvn clean package
 This will create a JAR file in the target directory. You can then run this JAR file using the Java command-line tool:
 
 ```bash
-java -jar target/swiss-re-poc-1.0-SNAPSHOT.jar path/to/your/csv/file.csv
+java -jar target/swiss-re-poc-1.0.0-SNAPSHOT.jar path/to/your/csv/file.csv
 ```
 
 Replace `path/to/your/csv/file.csv` with the actual path to the CSV file you want to analyze.  Please note that the CSV file should be formatted correctly for the application to work. Each line should represent an employee, with the following fields in order: id, first name, last name, salary, and manager ID (if applicable).
