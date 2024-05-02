@@ -12,13 +12,33 @@ import org.epam.swiss.re.model.Ceo;
 import org.epam.swiss.re.model.Employee;
 import org.epam.swiss.re.model.Subordinate;
 
+/**
+ * The CsvEmployeeLoader class is responsible for loading employee data from a CSV file.
+ * It reads the file line by line, parses each line into an Employee object, and stores them in a Map.
+ * The key of the Map is the unique ID of the employee.
+ * If an employee has a manager (indicated by a manager ID in the CSV file), the employee is created as a Subordinate object.
+ * The first employee without a manager ID is created as a Ceo object.
+ * The class supports a maximum of 1000 employees. If the CSV file contains more than 1000 lines (excluding the header), the rest will be skipped.
+ */
 public class CsvEmployeeLoader {
 
+    /**
+     * Loads employees from a CSV file.
+     *
+     * @param fileName The name of the CSV file.
+     * @return A map of employees, keyed by their unique ID.
+     */
     public Map<Long, Employee> loadEmployeesFromCsv(String fileName) {
         Path pathToEmployeeFile = Path.of(fileName);
         return parseFile(pathToEmployeeFile);
     }
 
+    /**
+     * Parses a CSV file into a map of employees.
+     *
+     * @param pathToEmployeeFile The path to the CSV file.
+     * @return A map of employees, keyed by their unique ID.
+     */
     private Map<Long, Employee> parseFile(Path pathToEmployeeFile) {
         List<String> lines = readFile(pathToEmployeeFile);
         Map<Long, Employee> employees = new HashMap<>();
@@ -34,6 +54,12 @@ public class CsvEmployeeLoader {
         return employees;
     }
 
+    /**
+     * Reads all lines from a file.
+     *
+     * @param pathToEmployeeFile The path to the file.
+     * @return A list of all lines in the file.
+     */
     private List<String> readFile(Path pathToEmployeeFile) {
         try {
             return Files.readAllLines(pathToEmployeeFile);
@@ -42,6 +68,13 @@ public class CsvEmployeeLoader {
         }
     }
 
+    /**
+     * Creates an Employee object from a parsed line of a CSV file.
+     *
+     * @param parsedValues The parsed values from a line of the CSV file.
+     * @param employees The map of already created employees.
+     * @return The created Employee object.
+     */
     private Employee createEmployee(String[] parsedValues, Map<Long, Employee> employees) {
         if (parsedValues.length > 4 && !parsedValues[4].isEmpty()) {
 
@@ -71,6 +104,12 @@ public class CsvEmployeeLoader {
         }
     }
 
+    /**
+     * Parses a line of a CSV file into an array of strings.
+     *
+     * @param line The line to parse.
+     * @return An array of parsed values.
+     */
     private String[] parseLine(String line) {
         return line.split(",");
     }
